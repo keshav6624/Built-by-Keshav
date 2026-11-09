@@ -52,9 +52,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className={`${geist.variable} ${inter.variable} ${display.variable} scroll-smooth`}>
       <head>
-        <Head>
-          <script>
-            {(function() {
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function() {
               try {
                 var t = localStorage.getItem('theme');
                 if (t === 'light' || t === 'dark') {
@@ -62,9 +62,9 @@ export default function RootLayout({
                   document.documentElement.style.colorScheme = t;
                 }
               } catch(e) {}
-            })()}
-          </script>
-        </Head>
+            })()`,
+          }}
+        />
       </head>
       <body className="bg-background text-text antialiased font-body">
         <MotionProvider>
