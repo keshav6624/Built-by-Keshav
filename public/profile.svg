@@ -1,0 +1,31 @@
+<svg viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration of Keshav Kumar">
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="rgba(104,215,255,0.22)"/>
+      <stop offset="1" stop-color="rgba(124,108,255,0.18)"/>
+    </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F2C9A6"/>
+      <stop offset="1" stop-color="#D9A07A"/>
+    </linearGradient>
+    <linearGradient id="hoodie" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="rgba(104,215,255,0.95)"/>
+      <stop offset="1" stop-color="rgba(124,108,255,0.95)"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="240" cy="240" r="232" fill="url(#bgGrad)"/>
+
+  <path d="M96 312 C150 196 330 196 384 312 L384 440 L96 440 Z" fill="url(#hoodie)"/>
+  <path d="M188 232 C188 200 292 200 292 232 L292 296 C292 332 188 332 188 296 Z" fill="url(#skin)"/>
+
+  <path d="M176 168 C176 116 304 116 304 168 L304 224 C304 286 176 286 176 224 Z" fill="#1c1410"/>
+  <path d="M196 240 C214 252 266 252 284 240 L284 268 C266 280 214 280 196 268 Z" fill="url(#skin)"/>
+
+  <circle cx="206" cy="212" r="7" fill="#1c1410"/>
+  <circle cx="274" cy="212" r="7" fill="#1c1410"/>
+  <path d="M206 246 C224 264 256 264 274 246" stroke="#1c1410" stroke-width="4" fill="none" stroke-linecap="round"/>
+
+  <path d="M96 312 C120 304 160 300 160 300" stroke="rgba(255,255,255,0.35)" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M384 312 C360 304 320 300 320 300" stroke="rgba(255,255,255,0.35)" stroke-width="3" fill="none" stroke-linecap="round"/>
+</svg>
