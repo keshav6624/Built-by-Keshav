@@ -1,6 +1,9 @@
+import type { StaticImageData } from 'next/image';
+
 export interface Project {
   id: string;
   title: string;
+  image: StaticImageData;
   shortDescription: string;
   problem: string;
   description: string;
@@ -17,28 +20,6 @@ export interface Project {
   github?: string;
 }
 
-export interface Writing {
-  id: string;
-  title: string;
-  description: string;
-  date: string;
-  readTime: number;
-  tags: string[];
-  featured: boolean;
-  category: string;
-  content: string;
-}
-
-export interface LibraryItem {
-  id: string;
-  title: string;
-  author?: string;
-  type: 'book' | 'paper' | 'repo' | 'doc' | 'video' | 'podcast' | 'resource';
-  description: string;
-  tags?: string[];
-  link?: string;
-}
-
 export interface TimelineEvent {
   id: string;
   title: string;
@@ -48,16 +29,3 @@ export interface TimelineEvent {
   impact?: string;
 }
 
-export interface ProjectMeta {
-  id: string;
-  date: string;
-}
-
-export interface LifeGoal {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  status: 'idea' | 'in-progress' | 'completed';
-  priority: 'low' | 'medium' | 'high';
-}

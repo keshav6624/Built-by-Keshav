@@ -1,89 +1,74 @@
 # Built by Keshav
 
-Personal digital garden and portfolio built with Next.js App Router.
+A statically generated portfolio and digital garden built with the Next.js App Router.
 
-## Tech Stack
+## Technology
 
-- Next.js 16 (App Router)
-- React 19 + TypeScript
+- Next.js 16 and React 19
+- TypeScript in strict mode
 - Tailwind CSS 4
 - Framer Motion
+- Next.js image optimization and metadata APIs
 
-## Project Structure
+## Architecture
 
-- src/app: Route segments and page-level metadata
-- src/components/common: Cross-page UI pieces (navbar, footer, command palette)
-- src/components/ui: Reusable primitives (card, badge, container)
-- src/lib: Shared utilities and shared types
-- src/content: Route content, site copy, and external links
-- public: Static assets
+```text
+assets/placeholder/       Project cover source images
+public/                   Files served without processing, including the resume
+src/
+  app/                    Routes, route metadata, and page composition
+  components/             Active reusable interface components
+    common/               Cross-page behavior
+    layout/               Site shell
+    shared/               Small shared navigation pieces
+    ui/                   Reusable primitives
+  data/                   Typed portfolio content
+    projects/
+      assets.ts           Project image registry
+      catalog.ts          Project records
+      validation.ts       Runtime catalog invariants
+      index.ts            Public project-data entry point
+  lib/                    Formatting, parsing, types, and pagination helpers
+```
+
+Routes import data through each directory's public `index.ts` entry point. Project records are checked for missing fields, duplicate IDs, and empty stack/tag collections when the catalog loads.
+
+Project notes remain author-friendly plain text in the catalog and are transformed into semantic headings, paragraphs, and lists by `src/lib/project-content.ts`.
 
 ## Local Development
 
-1. Install dependencies
+```bash
+npm install
+npm run dev
+```
 
-	 npm install
+Open [http://localhost:3000](http://localhost:3000).
 
-2. Start dev server
+## Quality Commands
 
-	 npm run dev
+```bash
+npm run lint       # ESLint
+npm run typecheck  # TypeScript without emitting files
+npm run check      # Lint and type-check together
+npm run build      # Optimized production build
+```
 
-3. Open http://localhost:3000
+Run `npm run check` before committing changes.
 
-## Quality Checks
+## Content Updates
 
-- Lint:
-
-	npm run lint
-
-- Production build:
-
-	npm run build
-
-- Run production server locally:
-
-	npm run start
+- Edit profile and external links in `src/data/site.ts`.
+- Edit biography content in `src/data/about/index.ts`.
+- Edit timeline entries in `src/data/timeline/index.ts`.
+- Add project images to `assets/placeholder/`, register them in `src/data/projects/assets.ts`, and add project records to `src/data/projects/catalog.ts`.
 
 ## Deployment
 
-Recommended: Vercel
+The project is compatible with Vercel's default Next.js deployment settings. No runtime environment variables are currently required.
 
-1. Push repository to GitHub
-2. Import project in Vercel
-3. Keep framework preset as Next.js
-4. Build command: npm run build
-5. Start command: npm run start (used for self-hosting, not needed on Vercel)
-6. Add custom domain in Project Settings > Domains
+## Security and Performance
 
-## Environment Configuration
-
-Create .env.local for local development.
-
-Suggested pattern:
-
-- .env.local: local-only values
-- .env.staging: staging values
-- .env.production: production values (managed in hosting provider secrets)
-
-Do not commit secrets.
-
-## Performance and SEO Notes
-
-- Route-level metadata is defined in app routes
-- Static generation is used for most pages
-- Dynamic project listing supports query filtering
-
-## Security Notes
-
-Baseline response headers are configured in next.config.ts:
-
-- X-Content-Type-Options: nosniff
-- X-Frame-Options: DENY
-- Referrer-Policy: strict-origin-when-cross-origin
-- Permissions-Policy: restrictive defaults
-
-## Roadmap
-
-- Add automated tests (unit + integration)
-- Add analytics and error monitoring
-- Add CI pipeline for lint + build + test
+- Security response headers are configured in `next.config.ts`.
+- External links use safe `noopener noreferrer` behavior where needed.
+- Project pages are statically generated from validated project data.
+- Project covers use the Next.js image component for responsive delivery.

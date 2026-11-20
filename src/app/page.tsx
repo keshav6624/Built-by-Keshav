@@ -16,13 +16,16 @@ const socialLinks = [
   { label: 'Email', href: profileLinks.email, icon: Mail },
 ];
 
-const writing = [
-  { title: 'What I am learning about machine learning systems', description: 'Notes from building models, metrics, and reliable data products.', date: 'Latest note' },
-  { title: 'Building in public, one useful system at a time', description: 'Thoughts on turning experiments into tools people can use.', date: 'Recent' },
-  { title: 'The long way around a hard technical problem', description: 'A practical record of questions, dead ends, and better approaches.', date: 'Archive' },
-];
+const homeProjectIds = [
+  'minimal-habit-tracker',
+  'rag-based-teaching-agent',
+  'ai-job-recommender',
+] as const;
 
-const featuredProjects = projects.slice(0, 3);
+const featuredProjects = homeProjectIds.flatMap((id) => {
+  const project = projects.find((item) => item.id === id);
+  return project ? [project] : [];
+});
 const updates = [...timelineEvents].reverse().slice(0, 4);
 const library = [
   { status: 'Exploring', title: 'Designing Data-Intensive Applications', author: 'Martin Kleppmann' },
@@ -38,8 +41,8 @@ export default function Home() {
         <p className="garden-kicker">A personal archive of things I build and learn.</p>
         <h1>{siteConfig.name}</h1>
         <p className="garden-bio">
-          I build software, study machine learning, and turn messy problems into useful systems.
-          Currently exploring data, AI, and thoughtful product engineering.
+          I build full-stack products and machine-learning systems, then write down what worked
+          and what I would change. Right now, I am focused on explainable AI, security, and product engineering.
         </p>
         <nav className="social-links" aria-label="Social links">
           {socialLinks.map((link) => (
@@ -50,33 +53,11 @@ export default function Home() {
         </nav>
       </section>
 
-      <section className="garden-section" aria-labelledby="writing-heading">
-        <div className="garden-section-heading">
-          <div>
-            <h2 id="writing-heading">Selected writing <span>({writing.length})</span></h2>
-            <p>Notes on building, learning, and figuring things out.</p>
-          </div>
-          <a href={`mailto:${siteConfig.email}?subject=Writing%20from%20Keshav`}>Get in touch →</a>
-        </div>
-        <div className="garden-list">
-          {writing.map((entry) => (
-            <article className="garden-list-item writing-item" key={entry.title}>
-              <div>
-                <p className="item-meta">{entry.date}</p>
-                <h3>{entry.title}</h3>
-                <p>{entry.description}</p>
-              </div>
-              <span className="item-arrow" aria-hidden="true">↗</span>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section className="garden-section" aria-labelledby="projects-heading">
         <div className="garden-section-heading">
           <div>
             <h2 id="projects-heading">Projects <span>({projects.length})</span></h2>
-            <p>Experiments, products, and systems I have shipped.</p>
+            <p>A selection of things I have designed, built, tested, and documented.</p>
           </div>
           <Link href="/projects">All projects →</Link>
         </div>
@@ -101,7 +82,7 @@ export default function Home() {
         <div className="garden-section-heading">
           <div>
             <h2 id="updates-heading">Updates</h2>
-            <p>Small notes from the journey.</p>
+            <p>What I have been learning, publishing, and building.</p>
           </div>
           <Link href="/timeline">Full timeline →</Link>
         </div>

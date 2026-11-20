@@ -4,7 +4,7 @@ import './globals.css';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import MotionProvider from '@/components/layout/MotionProvider';
-import Head from 'next/head';
+import Script from 'next/script';
 
 const geist = Geist({
   subsets: ['latin'],
@@ -51,22 +51,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth" className={`${geist.variable} ${inter.variable} ${display.variable} scroll-smooth`}>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function() {
-              try {
-                var t = localStorage.getItem('theme');
-                if (t === 'light' || t === 'dark') {
-                  document.documentElement.dataset.theme = t;
-                  document.documentElement.style.colorScheme = t;
-                }
-              } catch(e) {}
-            })()`,
-          }}
-        />
-      </head>
       <body className="bg-background text-text antialiased font-body">
+        <Script id="theme-bootstrap" strategy="beforeInteractive">
+          {`try {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'light' || theme === 'dark') {
+              document.documentElement.dataset.theme = theme;
+              document.documentElement.style.colorScheme = theme;
+            }
+          } catch {}`}
+        </Script>
         <MotionProvider>
           <Navbar />
           <main>{children}</main>
